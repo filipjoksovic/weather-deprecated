@@ -1,1 +1,192 @@
 /* You can add global styles to this file, and also import other style files */
+
+/* Importing Bootstrap SCSS file. */
+@import 'bootstrap/scss/bootstrap';
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+$default-gap: 0.5rem;
+
+$default-logo-width: 64px;
+$default-logo-height: 64px;
+
+$default-icon-width: 32px;
+$default-icon-height: 32px;
+$bg-light: #eaecef;
+
+
+body {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  font-family: 'Poppins', sans-serif !important;
+
+}
+
+app-home-layout {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  padding: 2rem;
+
+
+  display: grid;
+  grid-template-areas: "sidebar content"
+                        "sidebar content";
+  grid-template-rows: 1fr 1fr;
+  grid-template-columns: 3fr 9fr;
+}
+
+app-sidebar {
+  grid-area: sidebar;
+
+  & .sidebar {
+    background-color: $bg-light;
+
+    & .logo {
+      width: $default-logo-width;
+      height: $default-logo-height;
+      object-fit: contain;
+    }
+
+    & .sidebar-links {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      width: 100%;
+
+      & .sidebar-link {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        width: 100%;
+        text-decoration: none;
+        color: inherit;
+        gap: 0.5rem;
+
+        &__icon {
+          width: $default-icon-width;
+          height: $default-icon-height;
+        }
+      }
+    }
+
+
+  }
+}
+
+app-weather-summary {
+  grid-area: content;
+
+  .weather-summary {
+    height: 100%;
+    width: 100%;
+    display: grid;
+    grid-gap: $default-gap;
+    padding-inline: 1rem;
+    grid-template-areas: "city city weekly"
+                        "daily daily weekly"
+                        "details details weekly"
+                        "details details weekly";
+
+    grid-template-rows: 1fr 2fr 2fr 2fr;
+
+    & app-city-details {
+      grid-area: city;
+    }
+
+    & app-forecast-daily {
+      grid-area: daily;
+    }
+
+    & app-forecast-weekly {
+      grid-area: weekly;
+    }
+
+    & app-forecast-details {
+      grid-area: details;
+    }
+
+    app-city-details,
+    app-forecast-daily,
+    app-forecast-weekly,
+    app-forecast-details {
+      background-color: $bg-light;
+      border-radius: .5rem;
+      padding: 1rem;
+    }
+
+  }
+}
+
+.city-details {
+  display: grid;
+  grid-template-areas: "hero icon"
+                        "temperature icon";
+  height: 100%;
+
+  &__hero {
+    grid-area: hero;
+  }
+
+  &__icon {
+    grid-area: icon;
+    align-items: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    & img {
+      max-width: 192px;
+      max-height: 192px;
+    }
+  }
+
+  &__current-temperature {
+    grid-area: temperature;
+  }
+}
+
+.forecast-daily {
+  gap: calc($default-gap * 3);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+
+  &__forecast-container {
+    display: flex;
+    gap: calc($default-gap * 3);
+    justify-content: space-around;
+
+    &__forecast {
+      flex-grow: 1;
+      padding-block: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: calc($default-gap * 2);
+      justify-content: center;
+
+      &__time {
+        text-align: center;
+        font-weight: bold;
+        color: #9399a2;
+      }
+
+      &__icon {
+
+      }
+
+      &__temperature {
+        font-weight: bold;
+        font-size: large;
+        text-align: center;
+      }
+
+      &:not(:last-child) {
+        border-right: 1px solid #b9b9b9;
+        padding-right: 2rem;
+
+      }
+    }
+  }
+
+}
