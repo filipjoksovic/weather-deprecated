@@ -2,6 +2,9 @@ export interface DailyMeasurementResponse {
   time: string[];
   temperature_2m_max: number[];
   temperature_2m_min: number[];
+  wind_speed_10m_max: number[];
+  wind_gusts_10m_max: number[];
+  wind_direction_10m_dominant: number[];
 }
 
 export interface WeatherApiResponseModel extends DailyMeasurementResponse {
@@ -26,6 +29,9 @@ export interface DailyUnitsResponse {
   time: string;
   temperature_2m_max: string;
   temperature_2m_min: string;
+  wind_speed_10m_max: string;
+  wind_gusts_10m_max: string;
+  wind_direction_10m_dominant: string;
 }
 
 export interface CurrentUnitsResponse {

@@ -1,14 +1,33 @@
 <div class="city-details">
-  <div class="city-details__hero">
-    <h1>City Name</h1>
-    <span>Change of rain: 100%</span>
-  </div>
+  <ng-container *ngIf="coordinates && currentWeather; else noLocationTemplate">
+    <div class="city-details__hero">
+      <h1>City Name</h1>
+      <p>Rain: {{ currentWeather.rain | displayValueWithUnit }}</p>
+      <p>
+        Wind speed: {{ currentWeather.wind_speed_10m.value }}
+        {{ currentWeather.rain.unit }}
+      </p>
+      <p>Snowfall: {{ currentWeather.snowfall | displayValueWithUnit }}</p>
+    </div>
 
-  <div class="city-details__icon">
-    <img src="assets/ui/sun-solid.svg" />
-  </div>
+    <div class="city-details__icon">
+      <img
+        [src]="
+          currentWeather.temperature_2m.value > 15
+            ? 'assets/ui/sun-solid-orange.svg'
+            : 'assets/ui/snowflake-solid-blue.svg'
+        " />
+    </div>
 
-  <div class="city-details__current-temperature">
-    <h1>31 degree</h1>
-  </div>
+    <div class="city-details__current-temperature">
+      <h1>{{ currentWeather.temperature_2m | displayValueWithUnit }}</h1>
+    </div>
+  </ng-container>
+
+  <ng-template #noLocationTemplate>
+    <div>
+      <h3>No location available.</h3>
+      <h5>Try enabling location services for the weather to be displayed</h5>
+    </div>
+  </ng-template>
 </div>

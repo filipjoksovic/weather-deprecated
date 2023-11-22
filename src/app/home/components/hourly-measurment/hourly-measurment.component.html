@@ -1,0 +1,33 @@
+<div class="forecast-daily__forecast-container__forecast rounded shadow">
+  <span class="forecast-daily__forecast-container__forecast__time">{{
+    measurment.time
+  }}</span>
+  <div class="forecast-daily__forecast-container__forecast__icon">
+    <img
+      class="icon"
+      [src]="
+        measurment.temperature_2m.value > 15
+          ? 'assets/ui/sun-solid-orange.svg'
+          : 'assets/ui/snowflake-solid-blue.svg'
+      " />
+  </div>
+  <span class="forecast-daily__forecast-container__forecast__temperature">
+    {{ measurment.temperature_2m | displayValueWithUnit }}
+  </span>
+  <div class="measurment-info">
+    <app-rounded-pill iconSrc="assets/ui/umbrella-solid-blue.svg">
+      {{
+        measurment.precipitation_probability | displayValueWithUnit
+      }}</app-rounded-pill
+    >
+    <app-rounded-pill iconSrc="assets/ui/rain-solid-blue.svg">
+      {{ measurment.rain | displayValueWithUnit }}</app-rounded-pill
+    >
+    <app-rounded-pill iconSrc="assets/ui/rain-showers-solid-blue.svg">
+      {{ measurment.showers | displayValueWithUnit }}</app-rounded-pill
+    >
+    <app-rounded-pill iconSrc="assets/ui/snowflake-solid-blue.svg">
+      {{ measurment.snowfall | displayValueWithUnit }}</app-rounded-pill
+    >
+  </div>
+</div>

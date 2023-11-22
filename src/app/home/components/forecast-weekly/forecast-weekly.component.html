@@ -1,1 +1,39 @@
-<p>forecast-weekly works!</p>
+<ng-container *ngIf="weeklyWeather; else noWeeklyForecast">
+  <div class="weekly-forecast-container">
+    <p>7-day Forecast</p>
+
+    <ng-container *ngFor="let day of weeklyWeather">
+      <div class="card rounded">
+        <div class="card-body">
+          <div class="weekly-forecast__time">
+            <p class="fw-bold text-black">{{ day.time | dayOfWeek }}</p>
+          </div>
+          <div class="weekly-forecast__info">
+            <app-rounded-pill
+              tooltipText="Maximum temperature"
+              iconSrc="assets/ui/arrow-up-solid-blue.svg">
+              {{ day.temperature_2m_max | displayValueWithUnit }}
+            </app-rounded-pill>
+            <app-rounded-pill
+              tooltipText="Minimum temperature"
+              iconSrc="assets/ui/arrow-down-solid-blue.svg">
+              {{ day.temperature_2m_min | displayValueWithUnit }}
+            </app-rounded-pill>
+            <app-rounded-pill
+              tooltipText="Wind speed"
+              iconSrc="assets/ui/wind-solid-blue.svg">
+              {{ day.wind_speed_10m_max | displayValueWithUnit }}
+            </app-rounded-pill>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</ng-container>
+
+<ng-template #noWeeklyForecast>
+  <p>
+    No weekly forecast available. Try either enabling location services, or
+    searching for a city manually
+  </p>
+</ng-template>

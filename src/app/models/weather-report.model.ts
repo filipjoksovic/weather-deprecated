@@ -5,6 +5,12 @@ import {
   HourlyUnitsResponse,
   WeatherApiResponseModel,
 } from './weather-api-response.model';
+import { format, isToday } from 'date-fns';
+
+export interface ValueUnitPair<T extends string | number> {
+  value: T;
+  unit: string;
+}
 
 export interface WeatherReportModel {
   latitude: number;
@@ -16,31 +22,34 @@ export interface WeatherReportModel {
 
 export interface DailyMeasurement {
   time: string;
-  temperature_2m_max: string;
-  temperature_2m_min: string;
+  temperature_2m_max: ValueUnitPair<number>;
+  temperature_2m_min: ValueUnitPair<number>;
+  wind_speed_10m_max: ValueUnitPair<number>;
+  wind_gusts_10m_max: ValueUnitPair<number>;
+  wind_direction_10m_dominant: ValueUnitPair<number>;
 }
 
 export interface HourlyMeasurment {
   time: string;
-  temperature_2m: string;
-  precipitation_probability: string;
-  rain: string;
-  showers: string;
-  snowfall: string;
+  temperature_2m: ValueUnitPair<number>;
+  precipitation_probability: ValueUnitPair<number>;
+  rain: ValueUnitPair<number>;
+  showers: ValueUnitPair<number>;
+  snowfall: ValueUnitPair<number>;
 }
 
 export interface CurrentMeasurment {
   time: string;
-  interval: string;
-  temperature_2m: string;
-  apparent_temperature: string;
+  interval: ValueUnitPair<number>;
+  temperature_2m: ValueUnitPair<number>;
+  apparent_temperature: ValueUnitPair<number>;
   is_day: boolean;
-  precipitation: string;
-  rain: string;
-  showers: string;
-  snowfall: string;
-  wind_speed_10m: string;
-  wind_direction_10m: string;
+  precipitation: ValueUnitPair<number>;
+  rain: ValueUnitPair<number>;
+  showers: ValueUnitPair<number>;
+  snowfall: ValueUnitPair<number>;
+  wind_speed_10m: ValueUnitPair<number>;
+  wind_direction_10m: ValueUnitPair<number>;
 }
 
 export const fromWeatherApiResponseToWeatherModelMapper = (
@@ -51,16 +60,40 @@ export const fromWeatherApiResponseToWeatherModelMapper = (
     longitude: data.longitude,
     current_measurement: {
       time: data.current.time,
-      interval: `${data.current.interval} ${data.current_units.interval}`,
-      temperature_2m: `${data.current.temperature_2m} ${data.current_units.temperature_2m}`,
-      apparent_temperature: `${data.current.apparent_temperature} ${data.current_units.apparent_temperature}`,
+      interval: {
+        value: data.current.interval,
+        unit: data.current_units.interval,
+      },
+      temperature_2m: {
+        value: data.current.temperature_2m,
+        unit: data.current_units.temperature_2m,
+      },
+      apparent_temperature: {
+        value: data.current.apparent_temperature,
+        unit: data.current_units.apparent_temperature,
+      },
       is_day: Boolean(data.current.is_day),
-      precipitation: `${data.current.precipitation} ${data.current_units.precipitation}`,
-      rain: `${data.current.rain} ${data.current_units.rain}`,
-      showers: `${data.current.showers} ${data.current_units.showers}`,
-      snowfall: `${data.current.snowfall} ${data.current_units.snowfall}`,
-      wind_speed_10m: `${data.current.wind_speed_10m} ${data.current_units.wind_speed_10m}`,
-      wind_direction_10m: `${data.current.wind_direction_10m} ${data.current_units.wind_direction_10m}`,
+      precipitation: {
+        value: data.current.precipitation,
+        unit: data.current_units.precipitation,
+      },
+      rain: { value: data.current.rain, unit: data.current_units.rain },
+      showers: {
+        value: data.current.showers,
+        unit: data.current_units.showers,
+      },
+      snowfall: {
+        value: data.current.snowfall,
+        unit: data.current_units.snowfall,
+      },
+      wind_speed_10m: {
+        value: data.current.wind_speed_10m,
+        unit: data.current_units.wind_speed_10m,
+      },
+      wind_direction_10m: {
+        value: data.current.wind_direction_10m,
+        unit: data.current_units.wind_direction_10m,
+      },
     },
     hourly_measurements: fromResponseToModelHourlyMeasurmentMapper(
       data.hourly_units,
@@ -81,8 +114,26 @@ export const fromResponseToModelDailyMeasurementMapper = (
   daily.time.forEach((time: string, index: number) => {
     const dailyMeasurement: DailyMeasurement = {
       time: time,
-      temperature_2m_max: `${daily.temperature_2m_max[index]} ${dailyUnits.temperature_2m_max}`,
-      temperature_2m_min: `${daily.temperature_2m_min[index]} ${dailyUnits.temperature_2m_min}`,
+      temperature_2m_max: {
+        value: daily.temperature_2m_max[index],
+        unit: dailyUnits.temperature_2m_max,
+      },
+      temperature_2m_min: {
+        value: daily.temperature_2m_min[index],
+        unit: dailyUnits.temperature_2m_min,
+      },
+      wind_direction_10m_dominant: {
+        value: daily.wind_direction_10m_dominant[index],
+        unit: dailyUnits.wind_direction_10m_dominant,
+      },
+      wind_gusts_10m_max: {
+        value: daily.wind_gusts_10m_max[index],
+        unit: dailyUnits.wind_gusts_10m_max,
+      },
+      wind_speed_10m_max: {
+        value: daily.wind_speed_10m_max[index],
+        unit: dailyUnits.wind_speed_10m_max,
+      },
     };
     dailyMeasurements.push(dailyMeasurement);
   });
@@ -94,15 +145,24 @@ export const fromResponseToModelHourlyMeasurmentMapper = (
 ): HourlyMeasurment[] => {
   const hourlyMeasurements: HourlyMeasurment[] = [];
   hourly.time.forEach((time: string, index: number) => {
-    const hourlyMeasurment: HourlyMeasurment = {
-      time: time,
-      temperature_2m: `${hourly.temperature_2m[index]} ${hourlyUnits.temperature_2m}`,
-      precipitation_probability: `${hourly.precipitation_probability[index]} ${hourlyUnits.precipitation_probability}`,
-      rain: `${hourly.rain[index]} ${hourlyUnits.rain}`,
-      showers: `${hourly.showers[index]} ${hourlyUnits.showers}`,
-      snowfall: `${hourly.snowfall[index]} ${hourlyUnits.snowfall}`,
-    };
-    hourlyMeasurements.push(hourlyMeasurment);
+    if (isToday(new Date(time))) {
+      console.log(format(new Date(time), 'MM/dd/yyyy'));
+      const hourlyMeasurment: HourlyMeasurment = {
+        time: format(new Date(time), 'HH:mm'),
+        temperature_2m: {
+          value: hourly.temperature_2m[index],
+          unit: hourlyUnits.temperature_2m,
+        },
+        precipitation_probability: {
+          value: hourly.precipitation_probability[index],
+          unit: hourlyUnits.precipitation_probability,
+        },
+        rain: { value: hourly.rain[index], unit: hourlyUnits.rain },
+        showers: { value: hourly.showers[index], unit: hourlyUnits.showers },
+        snowfall: { value: hourly.snowfall[index], unit: hourlyUnits.snowfall },
+      };
+      hourlyMeasurements.push(hourlyMeasurment);
+    }
   });
   return hourlyMeasurements;
 };

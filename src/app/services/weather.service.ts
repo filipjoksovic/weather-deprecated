@@ -40,7 +40,14 @@ export class WeatherService {
             'showers',
             'snowfall',
           ],
-          daily: ['temperature_2m_max', 'temperature_2m_min'],
+          daily: [
+            'weather_code',
+            'temperature_2m_max',
+            'temperature_2m_min',
+            'wind_speed_10m_max',
+            'wind_gusts_10m_max',
+            'wind_direction_10m_dominant',
+          ],
         },
       })
       .pipe(map(fromWeatherApiResponseToWeatherModelMapper));
