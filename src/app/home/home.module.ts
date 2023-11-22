@@ -9,6 +9,9 @@ import { CityDetailsComponent } from './components/city-details/city-details.com
 import { ForecastDailyComponent } from './components/forecast-daily/forecast-daily.component';
 import { ForecastWeeklyComponent } from './components/forecast-weekly/forecast-weekly.component';
 import { ForecastDetailsComponent } from './components/forecast-details/forecast-details.component';
+import {
+  LocationBannerComponent
+} from "../shared/location-banner/location-banner.component";
 
 
 @NgModule({
@@ -23,7 +26,8 @@ import { ForecastDetailsComponent } from './components/forecast-details/forecast
   imports: [
     CommonModule,
     HomeRoutingModule,
-    SidebarComponent
+    SidebarComponent,
+    LocationBannerComponent
   ]
 })
 export class HomeModule { }

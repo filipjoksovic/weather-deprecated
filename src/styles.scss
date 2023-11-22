@@ -30,11 +30,18 @@ app-home-layout {
 
 
   display: grid;
-  grid-template-areas: "sidebar content"
+  grid-template-areas:  "alert alert"
+                        "sidebar content"
                         "sidebar content";
-  grid-template-rows: 1fr 1fr;
-  grid-template-columns: 3fr 9fr;
+  grid-template-rows: 1fr 15fr;
+  grid-template-columns: minmax(150px, 250px) 9fr;
+
+  & app-location-banner {
+    grid-area: alert;
+  }
+
 }
+
 
 app-sidebar {
   grid-area: sidebar;
@@ -82,7 +89,7 @@ app-weather-summary {
     width: 100%;
     display: grid;
     grid-gap: $default-gap;
-    padding-inline: 1rem;
+    padding-left: 1rem;
     grid-template-areas: "city city weekly"
                         "daily daily weekly"
                         "details details weekly"
@@ -189,4 +196,11 @@ app-weather-summary {
     }
   }
 
+}
+
+
+//HELPERS
+
+.cursor-pointer {
+  cursor: pointer;
 }
