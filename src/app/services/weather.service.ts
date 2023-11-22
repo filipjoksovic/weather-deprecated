@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
-import * as https from 'https';
-import * as http from 'http';
 import { HttpClient } from '@angular/common/http';
 import { WeatherApiResponseModel } from '../models/weather-api-response.model';
 import {

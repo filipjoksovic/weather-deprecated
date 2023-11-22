@@ -5,10 +5,7 @@ import { ValueUnitPair } from '../../models/weather-report.model';
   name: 'displayValueWithUnit',
 })
 export class DisplayValueWithUnitPipe implements PipeTransform {
-  transform(
-    value: ValueUnitPair<string | number>,
-    ...args: unknown[]
-  ): unknown {
+  transform(value: ValueUnitPair<string | number>): unknown {
     return value.value + ' ' + value.unit;
   }
 }

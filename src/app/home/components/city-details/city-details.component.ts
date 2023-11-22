@@ -1,12 +1,6 @@
 import { Component, Input } from '@angular/core';
-import {
-  GeolocationResponse,
-  GeolocationService,
-} from '../../../services/geolocation.service';
-import {
-  CurrentMeasurment,
-  WeatherReportModel,
-} from '../../../models/weather-report.model';
+import { GeolocationResponse } from '../../../services/geolocation.service';
+import { CurrentMeasurment } from '../../../models/weather-report.model';
 
 @Component({
   selector: 'app-city-details',

@@ -3,11 +3,8 @@
     placeholder="Search for a location"
     class="form-control"
     (keyup)="search(getValue($event))" />
-  <button class="btn btn-dark">
-    <img src="assets/ui/magnyfing-glass-solid-blue.svg" />
-  </button>
   <button (click)="handleGrantLocation($event)" class="btn btn-dark">
-    <img src="assets/ui/location-solid.svg" />
+    <img src="assets/ui/location-solid.svg" alt="Location icon" />
   </button>
 </div>
 <ng-container *ngIf="locationNotFound$ | async as locationNotFound">

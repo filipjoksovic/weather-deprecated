@@ -6,7 +6,6 @@ import {
   defaultGeolocationCityModel,
   GeolocationCityModel,
 } from '../models/geolocation-city.model';
-import { defaultGeolocationState } from './geolocation.service';
 
 @Injectable({
   providedIn: 'root',

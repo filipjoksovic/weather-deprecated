@@ -26,7 +26,7 @@ export class WeatherStoreService {
         next: (data: WeatherReportModel) => {
           this._weather$.next(data);
         },
-        error: (error: unknown) => {
+        error: () => {
           this._weatherError$.next(true);
         },
       });

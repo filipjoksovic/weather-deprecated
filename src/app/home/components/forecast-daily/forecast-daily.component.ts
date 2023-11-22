@@ -1,8 +1,5 @@
 import { Component, Input } from '@angular/core';
-import {
-  DailyMeasurement,
-  HourlyMeasurment,
-} from '../../../models/weather-report.model';
+import { HourlyMeasurment } from '../../../models/weather-report.model';
 
 @Component({
   selector: 'app-forecast-daily',

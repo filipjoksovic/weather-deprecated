@@ -46,8 +46,6 @@ export class GeolocationService {
     new BehaviorSubject<GeolocationError>(defaultGeoLocationErrorState());
   public locationError$ = this._locationError$.asObservable();
 
-  constructor() {}
-
   public getGeolocation() {
     const options = {
       enableHighAccuracy: true,

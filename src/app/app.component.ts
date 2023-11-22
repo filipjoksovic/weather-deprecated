@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
-import { WeatherService } from './services/weather.service';
-import { filter, map, switchMap } from 'rxjs';
-import { fromWeatherApiResponseToWeatherModelMapper } from './models/weather-report.model';
+import { filter } from 'rxjs';
 import { WeatherStoreService } from './services/weather.store.service';
 import {
   GeolocationService,

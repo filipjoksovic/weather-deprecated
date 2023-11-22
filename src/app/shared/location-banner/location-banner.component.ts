@@ -3,19 +3,13 @@ import { CommonModule } from '@angular/common';
 import { NgbAlert } from '@ng-bootstrap/ng-bootstrap';
 import { RouterLink } from '@angular/router';
 import {
-  isDefaultLocationState,
-  GeolocationResponse,
   GeolocationService,
-  isValidLocationErrorStateFilter,
   isValidLocationState,
 } from '../../services/geolocation.service';
 import {
-  BehaviorSubject,
-  combineLatest,
   debounceTime,
   distinctUntilChanged,
   filter,
-  of,
   Subject,
   switchMap,
 } from 'rxjs';
