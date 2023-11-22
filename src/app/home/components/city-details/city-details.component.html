@@ -1,6 +1,12 @@
 <div class="city-details">
   <ng-container *ngIf="coordinates && currentWeather; else noLocationTemplate">
     <div class="city-details__hero">
+      <h1>Current weather</h1>
+      <h5>
+        Detected coordinates
+        {{ coordinates.latitude }},
+        {{ coordinates.longitude }}
+      </h5>
       <p>Rain: {{ currentWeather.rain | displayValueWithUnit }}</p>
       <p>
         Wind speed: {{ currentWeather.wind_speed_10m.value }}
@@ -16,6 +22,19 @@
             ? 'assets/ui/sun-solid-orange.svg'
             : 'assets/ui/snowflake-solid-blue.svg'
         " />
+      <span
+        *ngIf="
+          currentWeather.temperature_2m.value > 15 &&
+          currentWeather.temperature_2m.value < 28
+        ">
+        Perfect for a walk.
+      </span>
+      <span *ngIf="currentWeather.temperature_2m.value > 28">
+        Getting kinda hot.
+      </span>
+      <span *ngIf="currentWeather.temperature_2m.value < 15">
+        It's starting to get chilly.
+      </span>
     </div>
 
     <div class="city-details__current-temperature">

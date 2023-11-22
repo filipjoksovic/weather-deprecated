@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { map, Observable } from 'rxjs';
+import { map, Observable, Subject, tap } from 'rxjs';
 import { GeolocationApiResponseModel } from '../models/geolocation-api-response.model';
 import {
   defaultGeolocationCityModel,
@@ -12,12 +12,22 @@ import { defaultGeolocationState } from './geolocation.service';
   providedIn: 'root',
 })
 export class LocationSearchService {
+  private _locationNotFound$: Subject<boolean> = new Subject<boolean>();
+  public locationNotFound$ = this._locationNotFound$.asObservable();
+
   constructor(private readonly http: HttpClient) {}
 
   public searchForSingleLocation(
     param: string
   ): Observable<GeolocationCityModel> {
     return this.searchForLocations(param).pipe(
+      tap(data => {
+        if (data.length === 0) {
+          this._locationNotFound$.next(true);
+        } else {
+          this._locationNotFound$.next(false);
+        }
+      }),
       map(data => (data.length > 0 && data[0]) || defaultGeolocationCityModel())
     );
   }

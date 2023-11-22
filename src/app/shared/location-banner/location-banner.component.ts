@@ -29,16 +29,8 @@ import { LocationSearchService } from '../../services/location-search.service';
   styleUrls: ['./location-banner.component.scss'],
 })
 export class LocationBannerComponent implements OnInit {
-  location$ = this.geolocationService.location$;
-  locationError$ = this.geolocationService.locationError$.pipe(
-    filter(isValidLocationErrorStateFilter)
-  );
-
-  public isValidLocationState = isValidLocationState;
-  public isDefaultLocationState = isDefaultLocationState;
-
   public searchText$: Subject<string> = new Subject<string>();
-
+  public locationNotFound$ = this.locationSearchService.locationNotFound$;
   constructor(
     private readonly geolocationService: GeolocationService,
     private readonly locationSearchService: LocationSearchService
