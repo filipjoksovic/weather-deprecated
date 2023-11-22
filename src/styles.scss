@@ -31,8 +31,6 @@ app-home-layout {
   display: grid;
   grid-template-areas:
     'alert alert alert'
-    //'sidebar content content'
-    //'sidebar content content';
     'content content content'
     'content content content'
     'content content content'
@@ -150,7 +148,6 @@ app-weather-summary {
     grid-area: icon;
     align-items: center;
     display: flex;
-    align-items: center;
     justify-content: center;
     flex-direction: column;
     gap: $default-gap * 2;
@@ -184,7 +181,6 @@ app-weather-summary {
     gap: calc($default-gap * 3);
 
     &__forecast {
-      flex-grow: 1;
       padding-block: 1rem;
       display: flex;
       flex-direction: column;
