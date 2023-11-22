@@ -13,13 +13,11 @@ $default-icon-width: 32px;
 $default-icon-height: 32px;
 $bg-light: #eaecef;
 
-
 body {
   width: 100vw;
   height: 100vh;
   overflow: hidden;
   font-family: 'Poppins', sans-serif !important;
-
 }
 
 app-home-layout {
@@ -28,20 +26,18 @@ app-home-layout {
   overflow: hidden;
   padding: 2rem;
 
-
   display: grid;
-  grid-template-areas:  "alert alert"
-                        "sidebar content"
-                        "sidebar content";
+  grid-template-areas:
+    'alert alert'
+    'sidebar content'
+    'sidebar content';
   grid-template-rows: 1fr 15fr;
   grid-template-columns: minmax(150px, 250px) 9fr;
 
   & app-location-banner {
     grid-area: alert;
   }
-
 }
-
 
 app-sidebar {
   grid-area: sidebar;
@@ -76,8 +72,6 @@ app-sidebar {
         }
       }
     }
-
-
   }
 }
 
@@ -90,10 +84,11 @@ app-weather-summary {
     display: grid;
     grid-gap: $default-gap;
     padding-left: 1rem;
-    grid-template-areas: "city city weekly"
-                        "daily daily weekly"
-                        "details details weekly"
-                        "details details weekly";
+    grid-template-areas:
+      'city city weekly'
+      'daily daily weekly'
+      'details details weekly'
+      'details details weekly';
 
     grid-template-rows: 1fr 2fr 2fr 2fr;
 
@@ -118,17 +113,17 @@ app-weather-summary {
     app-forecast-weekly,
     app-forecast-details {
       background-color: $bg-light;
-      border-radius: .5rem;
+      border-radius: 0.5rem;
       padding: 1rem;
     }
-
   }
 }
 
 .city-details {
   display: grid;
-  grid-template-areas: "hero icon"
-                        "temperature icon";
+  grid-template-areas:
+    'hero icon'
+    'temperature icon';
   height: 100%;
 
   &__hero {
@@ -179,7 +174,6 @@ app-weather-summary {
       }
 
       &__icon {
-
       }
 
       &__temperature {
@@ -191,13 +185,10 @@ app-weather-summary {
       &:not(:last-child) {
         border-right: 1px solid #b9b9b9;
         padding-right: 2rem;
-
       }
     }
   }
-
 }
-
 
 //HELPERS
 

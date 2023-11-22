@@ -8,9 +8,8 @@ describe('ForecastDailyComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ForecastDailyComponent ]
-    })
-    .compileComponents();
+      declarations: [ForecastDailyComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(ForecastDailyComponent);
     component = fixture.componentInstance;

@@ -1,5 +1,5 @@
-import {Injectable} from '@angular/core';
-import {BehaviorSubject} from "rxjs";
+import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 
 export interface GeolocationResponse {
   latitude: number;
@@ -15,56 +15,64 @@ export interface GeolocationError {
 export const defaultGeolocationState = (): GeolocationResponse => ({
   latitude: -1,
   longitude: -1,
-  accuracy: -1
-})
+  accuracy: -1,
+});
 
 export const defaultGeoLocationErrorState = (): GeolocationError => ({
   code: -1,
-  message: ""
-})
+  message: '',
+});
 
-export const isValidLocationState = (locationState: GeolocationResponse) => locationState.latitude !== -1 && locationState.longitude !== -1 && locationState.accuracy !== -1;
-export const isDefaultLocationState = (locationState: GeolocationResponse) => locationState.latitude === -1 && locationState.longitude === -1 && locationState.accuracy === -1;
+export const isValidLocationState = (locationState: GeolocationResponse) =>
+  locationState.latitude !== -1 &&
+  locationState.longitude !== -1 &&
+  locationState.accuracy !== -1;
+export const isDefaultLocationState = (locationState: GeolocationResponse) =>
+  locationState.latitude === -1 &&
+  locationState.longitude === -1 &&
+  locationState.accuracy === -1;
 
-export const isValidLocationErrorStateFilter = (locationStateError: GeolocationError) => locationStateError.code !== -1 && locationStateError.message !== "";
+export const isValidLocationErrorStateFilter = (
+  locationStateError: GeolocationError
+) => locationStateError.code !== -1 && locationStateError.message !== '';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class GeolocationService {
-
-  private _location$: BehaviorSubject<GeolocationResponse> = new BehaviorSubject<GeolocationResponse>(defaultGeolocationState());
+  private _location$: BehaviorSubject<GeolocationResponse> =
+    new BehaviorSubject<GeolocationResponse>(defaultGeolocationState());
   public location$ = this._location$.asObservable();
 
-  private _locationError$: BehaviorSubject<GeolocationError> = new BehaviorSubject<GeolocationError>(defaultGeoLocationErrorState());
+  private _locationError$: BehaviorSubject<GeolocationError> =
+    new BehaviorSubject<GeolocationError>(defaultGeoLocationErrorState());
   public locationError$ = this._locationError$.asObservable();
 
-  constructor() {
-  }
+  constructor() {}
 
   public getGeolocation() {
     const options = {
       enableHighAccuracy: true,
       timeout: 5000,
-      maximumAge: 0
-    }
+      maximumAge: 0,
+    };
 
-    navigator.geolocation.getCurrentPosition((position) => {
-      const {coords} = position;
-      this._location$.next({
-        latitude: coords.latitude,
-        longitude: coords.longitude,
-        accuracy: coords.accuracy
-      })
-    }, (positionError) => {
-      this._locationError$.next({
-        code: positionError.code,
-        message: positionError.message
-      })
-    }, options);
-
-
+    navigator.geolocation.getCurrentPosition(
+      position => {
+        const { coords } = position;
+        this._location$.next({
+          latitude: coords.latitude,
+          longitude: coords.longitude,
+          accuracy: coords.accuracy,
+        });
+      },
+      positionError => {
+        this._locationError$.next({
+          code: positionError.code,
+          message: positionError.message,
+        });
+      },
+      options
+    );
   }
-
-
 }

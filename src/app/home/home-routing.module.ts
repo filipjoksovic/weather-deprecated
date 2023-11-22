@@ -1,9 +1,7 @@
-import {NgModule} from '@angular/core';
-import {RouterModule, Routes} from '@angular/router';
-import {HomeLayoutComponent} from "./layout/home-layout.component";
-import {
-  WeatherSummaryComponent
-} from "./pages/weather-summary/weather-summary.component";
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { HomeLayoutComponent } from './layout/home-layout.component';
+import { WeatherSummaryComponent } from './pages/weather-summary/weather-summary.component';
 
 const routes: Routes = [
   {
@@ -12,15 +10,14 @@ const routes: Routes = [
     children: [
       {
         path: 'weather',
-        component: WeatherSummaryComponent
-      }
-    ]
-  }
+        component: WeatherSummaryComponent,
+      },
+    ],
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class HomeRoutingModule {
-}
+export class HomeRoutingModule {}
