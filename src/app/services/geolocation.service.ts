@@ -24,9 +24,7 @@ export const defaultGeoLocationErrorState = (): GeolocationError => ({
 });
 
 export const isValidLocationState = (locationState: GeolocationResponse) =>
-  locationState.latitude !== -1 &&
-  locationState.longitude !== -1 &&
-  locationState.accuracy !== -1;
+  locationState.latitude !== -1 && locationState.longitude !== -1;
 export const isDefaultLocationState = (locationState: GeolocationResponse) =>
   locationState.latitude === -1 &&
   locationState.longitude === -1 &&

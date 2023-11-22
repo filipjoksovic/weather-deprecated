@@ -43,7 +43,15 @@ export class LocationBannerComponent implements OnInit {
         distinctUntilChanged(),
         filter(value => value !== ''),
         switchMap((text: string) =>
-          this.locationSearchService.searchForSingleLocation(text)
+          this.locationSearchService.searchForSingleLocation(text).pipe(
+            filter(data =>
+              isValidLocationState({
+                longitude: data.longitude,
+                latitude: data.latitude,
+                accuracy: -1,
+              })
+            )
+          )
         )
       )
       .subscribe(data => {

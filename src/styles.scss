@@ -11,13 +11,15 @@ $default-logo-height: 64px;
 
 $default-icon-width: 32px;
 $default-icon-height: 32px;
-$bg-light: #eaecef;
+$bg-light: rgba(234, 236, 239, 0.61);
 
 body {
   width: 100vw;
   height: 100vh;
   overflow: hidden;
   font-family: 'Poppins', sans-serif !important;
+  background: url("assets/resources/layered-waves-haikei.svg");
+  background-size: cover;
 }
 
 app-home-layout {
@@ -127,6 +129,8 @@ app-weather-summary {
       background-color: $bg-light;
       border-radius: 0.5rem;
       padding: 1rem;
+      backdrop-filter: blur(20px);
+
     }
   }
 }
@@ -269,6 +273,14 @@ app-weather-summary {
     width: 64px;
     height: 64px;
   }
+}
+
+app-hourly-measurment{
+  margin-block: 1rem;
+}
+
+.card-body{
+  background: #C5D1EB;
 }
 
 //HELPERS
