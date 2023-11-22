@@ -18,9 +18,9 @@ export class WeatherStoreService {
 
   constructor(private readonly weatherService: WeatherService) {}
 
-  public getWeather() {
+  public getWeather(lat = 52.52, long = 13.41) {
     this.weatherService
-      .getWeather()
+      .getWeather(lat, long)
       .pipe(take(1))
       .subscribe({
         next: (data: WeatherReportModel) => {

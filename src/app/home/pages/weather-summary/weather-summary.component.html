@@ -8,6 +8,7 @@
       [dailyWeather]="vm.weather?.hourly_measurements"></app-forecast-daily>
     <app-forecast-weekly
       [weeklyWeather]="vm.weather?.daily_measurements"></app-forecast-weekly>
-    <app-forecast-details></app-forecast-details>
+    <app-forecast-details
+      [currentWeather]="vm.weather?.current_measurement"></app-forecast-details>
   </div>
 </ng-container>

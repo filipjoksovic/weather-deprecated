@@ -50,6 +50,9 @@ export interface CurrentMeasurment {
   snowfall: ValueUnitPair<number>;
   wind_speed_10m: ValueUnitPair<number>;
   wind_direction_10m: ValueUnitPair<number>;
+  cloud_cover: ValueUnitPair<number>;
+  pressure_msl: ValueUnitPair<number>;
+  surface_pressure: ValueUnitPair<number>;
 }
 
 export const fromWeatherApiResponseToWeatherModelMapper = (
@@ -93,6 +96,18 @@ export const fromWeatherApiResponseToWeatherModelMapper = (
       wind_direction_10m: {
         value: data.current.wind_direction_10m,
         unit: data.current_units.wind_direction_10m,
+      },
+      cloud_cover: {
+        value: data.current.cloud_cover,
+        unit: data.current_units.cloud_cover,
+      },
+      pressure_msl: {
+        value: data.current.pressure_msl,
+        unit: data.current_units.pressure_msl,
+      },
+      surface_pressure: {
+        value: data.current.surface_pressure,
+        unit: data.current_units.surface_pressure,
       },
     },
     hourly_measurements: fromResponseToModelHourlyMeasurmentMapper(
@@ -146,7 +161,6 @@ export const fromResponseToModelHourlyMeasurmentMapper = (
   const hourlyMeasurements: HourlyMeasurment[] = [];
   hourly.time.forEach((time: string, index: number) => {
     if (isToday(new Date(time))) {
-      console.log(format(new Date(time), 'MM/dd/yyyy'));
       const hourlyMeasurment: HourlyMeasurment = {
         time: format(new Date(time), 'HH:mm'),
         temperature_2m: {

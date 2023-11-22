@@ -6,11 +6,7 @@ import { DailyMeasurement } from '../../../models/weather-report.model';
   templateUrl: './forecast-weekly.component.html',
   styleUrls: ['./forecast-weekly.component.scss'],
 })
-export class ForecastWeeklyComponent implements OnInit {
+export class ForecastWeeklyComponent {
   @Input()
   weeklyWeather!: DailyMeasurement[] | undefined;
-
-  ngOnInit() {
-    console.log(this.weeklyWeather);
-  }
 }

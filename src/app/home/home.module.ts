@@ -14,6 +14,7 @@ import { DisplayValueWithUnitPipe } from './pipes/display-value-with-unit.pipe';
 import { DayOfWeekPipe } from './pipes/day-of-week.pipe';
 import { HourlyMeasurmentComponent } from './components/hourly-measurment/hourly-measurment.component';
 import { RoundedPillComponent } from '../shared/rounded-pill/rounded-pill.component';
+import { DetailsPanelComponent } from './components/details-panel/details-panel.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { RoundedPillComponent } from '../shared/rounded-pill/rounded-pill.compon
     DisplayValueWithUnitPipe,
     DayOfWeekPipe,
     HourlyMeasurmentComponent,
+    DetailsPanelComponent,
   ],
   imports: [
     CommonModule,

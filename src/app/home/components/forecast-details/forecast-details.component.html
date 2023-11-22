@@ -1,34 +1,41 @@
-<div class="forecast-detailed-panel rounded px-2 py-3 shadow">
-  <img class="mb-3" src="assets/ui/wind-solid-blue.svg" />
-  <h5>Wind speed</h5>
-  <span>Value</span>
-</div>
+<h3>Additional details</h3>
+<div class="panel-wrapper">
+  <ng-container *ngIf="currentWeather; else noCurrentWeather">
+    <app-details-panel
+      detailName="Wind Speed"
+      [detailValue]="currentWeather.wind_speed_10m"
+      iconUrl="assets/ui/wind-solid-blue.svg"></app-details-panel>
 
-<div class="forecast-detailed-panel rounded px-2 py-3 shadow">
-  <img class="mb-3" src="assets/ui/compass-solid-blue.svg" />
-  <h5>Wind direction</h5>
-  <span>Value</span>
-</div>
-<div class="forecast-detailed-panel rounded px-2 py-3 shadow">
-  <img class="mb-3" src="assets/ui/water-droplet-solid.svg" />
-  <h5>Humidity</h5>
-  <span>Value</span>
-</div>
+    <app-details-panel
+      detailName="Wind direction"
+      [detailValue]="currentWeather.wind_direction_10m"
+      iconUrl="assets/ui/compass-solid-blue.svg"></app-details-panel>
 
-<div class="forecast-detailed-panel rounded px-2 py-3 shadow">
-  <img class="mb-3" src="assets/ui/cloud-solid-blue.svg" />
-  <h5>Cloud cover</h5>
-  <span>Value</span>
-</div>
+    <app-details-panel
+      detailName="MSL pressure"
+      [detailValue]="currentWeather.pressure_msl"
+      iconUrl="assets/ui/water-droplet-solid.svg">
+    </app-details-panel>
 
-<div class="forecast-detailed-panel rounded px-2 py-3 shadow">
-  <img class="mb-3" src="assets/ui/person-ground-solid-blue.svg" />
-  <h5>Surface pressure</h5>
-  <span>Value</span>
-</div>
+    <app-details-panel
+      detailName="Cloud cover"
+      [detailValue]="currentWeather.cloud_cover"
+      iconUrl="assets/ui/cloud-solid-blue.svg">
+    </app-details-panel>
 
-<div class="forecast-detailed-panel rounded px-2 py-3 shadow">
-  <img class="mb-3" src="assets/ui/sun-solid-orange.svg" />
-  <h5>Feels like...</h5>
-  <span>Value</span>
+    <app-details-panel
+      detailName="Surface pressure"
+      [detailValue]="currentWeather.surface_pressure"
+      iconUrl="assets/ui/person-ground-solid-blue.svg">
+    </app-details-panel>
+
+    <app-details-panel
+      detailName="Feels like..."
+      [detailValue]="currentWeather.apparent_temperature"
+      iconUrl="assets/ui/sun-solid-orange.svg">
+    </app-details-panel>
+  </ng-container>
 </div>
+<ng-template #noCurrentWeather>
+  <h5>No additional details are available.</h5>
+</ng-template>

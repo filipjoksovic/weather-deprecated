@@ -75,4 +75,12 @@ export class GeolocationService {
       options
     );
   }
+
+  setLocation(param: { latitude: number; longitude: number }) {
+    this._location$.next({
+      latitude: param.latitude,
+      longitude: param.longitude,
+      accuracy: 100,
+    });
+  }
 }

@@ -1,10 +1,16 @@
 <div class="forecast-daily">
   <h3>Today's forecast</h3>
 
-  <div class="forecast-daily__forecast-container">
-    <ng-container *ngFor="let dailyMeasurment of dailyWeather">
-      <app-hourly-measurment
-        [measurment]="dailyMeasurment"></app-hourly-measurment>
-    </ng-container>
-  </div>
+  <ng-container *ngIf="dailyWeather; else noDailyWeather">
+    <div class="forecast-daily__forecast-container">
+      <ng-container *ngFor="let dailyMeasurment of dailyWeather">
+        <app-hourly-measurment
+          [measurment]="dailyMeasurment"></app-hourly-measurment>
+      </ng-container>
+    </div>
+  </ng-container>
+
+  <ng-template #noDailyWeather>
+    <h5>No daily weather available.</h5>
+  </ng-template>
 </div>

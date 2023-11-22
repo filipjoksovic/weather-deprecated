@@ -15,12 +15,12 @@ import {
 export class WeatherService {
   constructor(private readonly http: HttpClient) {}
 
-  public getWeather(): Observable<WeatherReportModel> {
+  public getWeather(lat: number, long: number): Observable<WeatherReportModel> {
     return this.http
       .get<WeatherApiResponseModel>(`https://api.open-meteo.com/v1/forecast`, {
         params: {
-          latitude: 52.52,
-          longitude: 13.41,
+          latitude: lat,
+          longitude: long,
           current: [
             'temperature_2m',
             'relative_humidity_2m',
@@ -32,6 +32,9 @@ export class WeatherService {
             'snowfall',
             'wind_speed_10m',
             'wind_direction_10m',
+            'cloud_cover',
+            'pressure_msl',
+            'surface_pressure',
           ],
           hourly: [
             'temperature_2m',

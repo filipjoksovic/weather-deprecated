@@ -1,7 +1,6 @@
 <div class="city-details">
   <ng-container *ngIf="coordinates && currentWeather; else noLocationTemplate">
     <div class="city-details__hero">
-      <h1>City Name</h1>
       <p>Rain: {{ currentWeather.rain | displayValueWithUnit }}</p>
       <p>
         Wind speed: {{ currentWeather.wind_speed_10m.value }}
@@ -27,7 +26,10 @@
   <ng-template #noLocationTemplate>
     <div>
       <h3>No location available.</h3>
-      <h5>Try enabling location services for the weather to be displayed</h5>
+      <h5>
+        Try enabling location services or searching for a location for the
+        weather to be displayed.
+      </h5>
     </div>
   </ng-template>
 </div>

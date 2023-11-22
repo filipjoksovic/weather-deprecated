@@ -1,0 +1,5 @@
+<div class="forecast-detailed-panel rounded px-2 py-3 shadow">
+  <img class="mb-3" *ngIf="iconUrl" [src]="iconUrl" />
+  <h5>{{ detailName }}</h5>
+  <span>{{ detailValue | displayValueWithUnit }}</span>
+</div>

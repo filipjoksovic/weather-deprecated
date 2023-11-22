@@ -47,6 +47,9 @@ export interface CurrentUnitsResponse {
   snowfall: string;
   wind_speed_10m: string;
   wind_direction_10m: string;
+  cloud_cover: string;
+  pressure_msl: string;
+  surface_pressure: string;
 }
 
 export interface CurrentMeasurementResponse {
@@ -62,6 +65,9 @@ export interface CurrentMeasurementResponse {
   snowfall: number;
   wind_speed_10m: number;
   wind_direction_10m: number;
+  cloud_cover: number;
+  pressure_msl: number;
+  surface_pressure: number;
 }
 
 export interface HourlyUnitsResponse {
